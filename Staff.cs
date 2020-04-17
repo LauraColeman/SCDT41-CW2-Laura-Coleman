@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CW2
 {
-    abstract class Staff
+   public abstract class Staff
     {
 
         //Shared values between nurses and dentists. 
