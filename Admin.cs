@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
-namespace CW2
+namespace CW22
 {
     class Admin
     {
@@ -14,15 +15,15 @@ namespace CW2
 
         //Constructor to create admin object.
 
-        
+
         public Admin(string name, string username, string password)
         {
             this.aName = name;
             this.aUsername = username;
             this.aPassword = password;
-                        
+
         }
-        
+
         //Log In Function
 
         public void adminLogIn() //Restricts access to an admin and presents functions in a method.
@@ -85,13 +86,13 @@ namespace CW2
 
                 case 4://Option 4
 
-                   
+
                     break;
 
 
 
                 case 5://Option 5
-                   
+
 
                     break;
 
@@ -103,12 +104,20 @@ namespace CW2
 
         }
 
+        public void AddUser()
+        {
+            
+                
+                Console.WriteLine("Creating New User");
+                String Username, Password = string.Empty;
+                Console.WriteLine("Enter The UserName");
+                Username = Console.ReadLine();
+                Console.WriteLine("Enter The Passwrod for the User");
+                Password = Console.ReadLine();
+
+            }
+
     }
 
-      
-    }
 
-
-
-
-    
+}
