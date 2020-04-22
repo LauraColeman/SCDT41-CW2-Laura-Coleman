@@ -9,6 +9,8 @@ namespace CW22
 {
     class Nurse : Staff
     {
+
+
         //base to access constructor from Staff abstract class.
         public Nurse(string name, string practice, int room, string username, string password) : base(name, practice, room, username, password)
 
@@ -16,13 +18,29 @@ namespace CW22
 
         }
 
-        //constructor from abstract class
 
-       
 
-        
+
+
+        //List to store nurses
+        private static List<Nurse> nurseStaff = new List<Nurse>();
+
+
+
+        //Make accessible from Program.
+        public static List<Nurse> nurses
+        {
+            get { return nurseStaff; }
+
+        }
+
+
+
     }
-}
+
+
+    }
+
 
 
 

@@ -15,11 +15,17 @@ namespace CW22
 
         static void Main(string[] args)
         {
+            //List to store Nurses information.
+            
+           
+        //List for dentists.
+            List<dentist> denStaff = new List<dentist>();
+            //List for patients.
+            List<Patient> patients = new List<Patient>();
 
-            List<Nurse> nurseStaff = new List<Nurse>();
 
 
-        Console.WriteLine("Press 1 for admin access. Press 2 for nurse access. Press 3 for doctor access. Press 4 for Reception access.");
+            Console.WriteLine("Press 1 for admin access. Press 2 for nurse access. Press 3 for doctor access. Press 4 for Reception access.");
 
             string choice = Console.ReadLine();
 
@@ -34,19 +40,21 @@ namespace CW22
 
             else if (choice == "2") //Nurses
             {
-               
-                Nurse Nurse1 = new Nurse("Jane Doe", "Taunton", 1, "jane", "jane");
-                nurseStaff.Add(Nurse1);
+                //calling list of nurses.
+                List<Nurse> nurses = Nurse.nurses;
+                Nurse nurse1 = new Nurse("NURSEONE", "Taunton", 1, "one", "one");
+                nurses.Add(nurse1);
+                Nurse nurse2 = new Nurse("NURSETWO", "Street", 1, "two", "two");
+                nurses.Add(nurse2);
 
-                Nurse1.LogIn();
-               
+                nurse1.LogIn();
 
 
             }
 
-            else if(choice == "3") //Doctor
+            else if (choice == "3") //Doctor
             {
-                
+
 
 
             }
@@ -57,6 +65,9 @@ namespace CW22
 
 
             }
+
+
+           
 
         }
     }

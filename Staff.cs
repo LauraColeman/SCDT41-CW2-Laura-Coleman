@@ -91,7 +91,42 @@ namespace CW22
                 Console.WriteLine("Welcome {0}", staffName);
 
             
+            //Confirms practice location of nurse
+            if(practice == "Taunton")
+            {
+                staffTaunton();
+
+            }
+
+            else if(practice =="Street")
+            {
+                staffStreet();
+
+            }
+
+        
 
         }
+
+
+        //Method to view practice location of Staff
+        public void staffTaunton()
+        {
+            Console.WriteLine("Taunton Practice");
+
+        }
+
+        public void staffStreet()
+        {
+            Console.WriteLine("Street Practice");
+        }
+        
+        //Method to view appointments
+        public void viewAppointments()
+        {
+
+
+        }
+
     }
 }
