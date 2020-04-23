@@ -88,45 +88,29 @@ namespace CW22
             if (Attempts > 2)
                 Console.WriteLine("Login failure");
             else
-                Console.WriteLine("Welcome {0}", staffName);
+                Console.WriteLine("Welcome {0}, {1} Practice", staffName,practice);
+            
+        }
+
+        //Method to view all patients.  
+        //Access list of patients and print contents.
+
+        public void ViewPatients()
+        {
+            List<Patient> patients = Patient.pats;
+
+            foreach (object o in patients)
+            {
+                Console.WriteLine(o);
+            }
 
             
-            //Confirms practice location of nurse
-            if(practice == "Taunton")
-            {
-                staffTaunton();
-
-            }
-
-            else if(practice =="Street")
-            {
-                staffStreet();
-
-            }
-
-        
-
         }
 
-
-        //Method to view practice location of Staff
-        public void staffTaunton()
-        {
-            Console.WriteLine("Taunton Practice");
-
-        }
-
-        public void staffStreet()
-        {
-            Console.WriteLine("Street Practice");
-        }
-        
-        //Method to view appointments
-        public void viewAppointments()
-        {
+        //View Appointments
+        //Add Notes to Appointments
 
 
-        }
 
     }
 }
