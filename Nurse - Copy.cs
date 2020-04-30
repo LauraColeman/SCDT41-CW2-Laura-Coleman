@@ -3,47 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 using System.Reflection;
 
 namespace CW22
 {
-    class dentist : Staff
+    class Nurse : Staff
     {
+
+
         //base to access constructor from Staff abstract class.
-        public dentist(string name, string practice, int room, string username, string password) : base(name, practice, room, username, password)
+        public Nurse(string name, string practice, int room, string username, string password) : base(name, practice, room, username, password)
 
         {
+         }
 
-        }
-
-        public dentist()
+        public Nurse()
         {
         }
 
-        private static List<dentist> denStaff = new List<dentist>();
+        //List to store nurses
+        private static List<Nurse> nurseStaff = new List<Nurse>();
 
 
 
 
         //Make accessible from Program.
-        public static List<dentist> den
+        public static List<Nurse> nurse
         {
-            get { return denStaff; }
+            get { return nurseStaff; }
 
         }
 
-        //Edit dentists
+        
         //Method to edit nurse details and assign practice and room
-        public void editDen()
+        public void editNurse()
         {
-            List<dentist> denEd = dentist.den;
+            List<Nurse> nurseEd = Nurse.nurse;
 
             Console.WriteLine("What details would you like to edit?");
             Console.WriteLine("Press 1 for NAME. \n Press 2 for PRACTICE.\n Press 3 for ROOM \n press 4 for USERNAME \n Press 5 for PASSWORD");
 
             //Displays details of nurses to edit.
 
-            foreach (var names in denEd)
+            foreach (var names in nurseEd)
             {
                 Console.WriteLine(names);
             }
@@ -54,7 +57,7 @@ namespace CW22
 
                 case 1: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit.");
+                    Console.WriteLine("Choose a Nurses' Name to Edit.");
                     string choice = Console.ReadLine();
 
 
@@ -66,7 +69,8 @@ namespace CW22
                         Console.WriteLine("Enter a new Name");
                         string newName = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice).staffName = newName;
+                         //LINQ to replace
+                        nurseEd.First(d => d.staffName == choice).staffName = newName;
 
                     }
 
@@ -74,7 +78,7 @@ namespace CW22
 
                 case 2: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit Practice.");
+                    Console.WriteLine("Choose a Nurses' Name to Edit Practice.");
                     string choice2 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -85,14 +89,14 @@ namespace CW22
                         Console.WriteLine("Assign a new Practice");
                         string newPrac = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice2).staffPractice = newPrac;
+                        nurseEd.First(d => d.staffName == choice2).staffPractice = newPrac;
 
                     }
 
                     break;
                 case 3: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit Room Assignment.");
+                    Console.WriteLine("Choose a Nurses' Name to Edit Room Assignment.");
                     string choice3 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -103,7 +107,7 @@ namespace CW22
                         Console.WriteLine("Assign a new Room");
                         int newRoom = Convert.ToInt32(Console.ReadLine());
 
-                        denEd.First(d => d.staffName == choice3).staffRoom = newRoom;
+                        nurseEd.First(d => d.staffName == choice3).staffRoom = newRoom;
 
                     }
 
@@ -111,7 +115,7 @@ namespace CW22
 
                 case 4: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit Username.");
+                    Console.WriteLine("Choose a Nurses' Name to Edit Username.");
                     string choice4 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -122,14 +126,14 @@ namespace CW22
                         Console.WriteLine("Assign a new Username");
                         string newUname = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice4).userName = newUname;
+                        nurseEd.First(d => d.staffName == choice4).userName = newUname;
 
                     }
 
                     break;
                 case 5: //Name
 
-                    Console.WriteLine("Choose a dentists' Name to Edit their Password.");
+                    Console.WriteLine("Choose a Nurses' Name to Edit their Password.");
                     string choice5 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -140,7 +144,7 @@ namespace CW22
                         Console.WriteLine("Assign a new Password");
                         string newPass = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice5).userPassword = newPass;
+                        nurseEd.First(d => d.staffName == choice5).userPassword = newPass;
 
                     }
 
@@ -149,27 +153,27 @@ namespace CW22
 
         }
 
-        public void deleteDen()
+        public void deleteNur()
         {
-            List<dentist> dentists = dentist.den;
+            List<Nurse> nurseDel = Nurse.nurse;
 
             //Retrieve and print list of patients names.
-            foreach (var names in dentists.Select(d => d.staffName))
+            foreach (var names in nurseDel.Select(d => d.staffName))
             {
                 Console.WriteLine(names);
             }
 
 
 
-            Console.WriteLine("Choose a dentist to Delete.");
-            string delete = Console.ReadLine();
+            Console.WriteLine("Choose a nurse to Delete.");
+            string deleteN = Console.ReadLine();
 
-            foreach (var o in dentists)
+            foreach (var o in nurse)
             {
                 //if a match is found, object/patient will be removed from list.
-                if (staffName == delete)
+                if (staffName == deleteN)
                 {
-                    dentists.Remove(o);
+                    nurseDel.Remove(o);
 
 
                 }
@@ -177,11 +181,16 @@ namespace CW22
                 else
                 {
                     Console.WriteLine("That name is not recognised, please try again.");
-                    deleteDen();
+                    deleteNur();
 
                 }
 
             }
         }
+
+
     }
 }
+
+
+

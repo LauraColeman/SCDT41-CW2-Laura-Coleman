@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+
 
 namespace CW22
 {
@@ -63,9 +65,30 @@ namespace CW22
 
         }
 
+        public Staff()
+        {
+
+        }
+
+        //override to print objects of list, not just class/namespace name.
+        public override string ToString()
+        {
+            //calls lists
+            List<Nurse> nurseO = Nurse.nurse;
+            List<dentist> dentistsO = dentist.den;
+
+            //Prints
+            return "Name: " + staffName + "Practice: " + practice + "Room: " + room + "Username: " + username + "Password: " + password;
+
+        }
+
         //Shared method between Nurses and Dentists. Admin and receptionists have other functions contained in method/s.
         public void LogIn()
         {
+            //calls lists with login info
+            List<Nurse> nurseO = Nurse.nurse;
+            List<dentist> dentistsO = dentist.den;
+
 
             //Login attempts counter
             int Attempts = 0;
@@ -78,18 +101,22 @@ namespace CW22
                 Console.WriteLine("Enter password");
                 string password = Console.ReadLine();
 
-                if (username != userName && password != userPassword)
-                    Attempts++;
+                if (username != userName && password != userPassword && Attempts > 0)
+                {
+                    Attempts +=1;
+
+                    Console.WriteLine("Login failure {0} Attempts Remaining", Attempts);
+                }
                 else
                     break;
+
+                Console.WriteLine("Welcome {0}", username);
+
             }
 
             //Display the result
-            if (Attempts > 2)
-                Console.WriteLine("Login failure");
-            else
-                Console.WriteLine("Welcome {0}, {1} Practice", staffName,practice);
-            
+
+
         }
 
         //Method to view all patients.  
@@ -99,18 +126,26 @@ namespace CW22
         {
             List<Patient> patients = Patient.pats;
 
-            foreach (object o in patients)
+            Type type = typeof(Patient);
+
+            // Loop over properties.
+            foreach (PropertyInfo propertyInfo in type.GetProperties())
             {
-                Console.WriteLine(o);
+                Console.WriteLine(propertyInfo);
+
+
+
             }
 
-            
+
+
+
+
         }
 
-        //View Appointments
-        //Add Notes to Appointments
 
+        
 
 
     }
-}
+    }

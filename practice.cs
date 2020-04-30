@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Reflection;
+
+
 namespace CW22
 {
     class practice
@@ -47,5 +50,36 @@ namespace CW22
             }
         }
 
+
+        public void deletePractice()
+        {
+            Console.WriteLine("Choose a Practice to DELETE.");
+
+            //Retrieve and print list of patients names.
+            foreach (var pair in practiceInfo)
+            {
+
+                Console.WriteLine("{0}, {1}.", pair.Key, pair.Value);
+            }
+
+            string pChoice = Console.ReadLine();
+
+            //checks if input is in list.
+            if (practiceInfo.ContainsKey(pChoice))
+            {
+
+                //if a match is found, practice will be removed from dictionary.
+
+                practiceInfo.Remove(key);
+                Console.WriteLine("Practice {0} Deleted", pChoice);
+            }
+
+            else
+            {
+
+                Console.WriteLine("That practice does not exist, please try again.");
+            }
+
+        }
     }
 }

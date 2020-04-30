@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Reflection;
 
 namespace CW22
 {
@@ -35,25 +36,20 @@ namespace CW22
             {
                 //calling list of nurses.
 
-                List<Nurse> nurses = Nurse.nurse;
-                Nurse nurse1 = new Nurse("NURSEONE", "Taunton", 1, "one", "one");
-                nurses.Add(nurse1);
-                Nurse nurse2 = new Nurse("NURSETWO", "Street", 1, "two", "two");
-                nurses.Add(nurse2);
-                nurses.ForEach(item => item.LogIn());
+                Nurse nurseLog = new Nurse();
+                nurseLog.LogIn();
 
 
 
             }
 
-            else if (choice == "3") //Doctor
+            else if (choice == "3") //Dentist
             {
-                List<dentist> dens = dentist.den;
-                dentist den1 = new dentist("DENONE", "Taunton", 1, "dOne", "dOne");
-                dens.Add(den1);
-                dentist den2 = new dentist("DENONE", "Taunton", 1, "dTwo", "dTwo");
-                dens.Add(den1);
-                dens.ForEach(item => item.LogIn());
+               
+                dentist denLog = new dentist();
+                denLog.LogIn();
+
+
 
 
             }
