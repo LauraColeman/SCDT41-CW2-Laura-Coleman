@@ -89,6 +89,12 @@ namespace CW22
             List<Nurse> nurseO = Nurse.nurse;
             List<dentist> dentistsO = dentist.den;
 
+            //Test staff members
+            Nurse nurse1 = new Nurse("Tester", "Taunton", 1, "Test", "Test");
+            nurseO.Add(nurse1);
+            Nurse nurse2 = new Nurse("Nurse2", "Street", 3, "two", "two");
+            nurseO.Add(nurse2);
+
 
             //Login attempts counter
             int Attempts = 0;
