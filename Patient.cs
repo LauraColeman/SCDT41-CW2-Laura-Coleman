@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace CW22
 {
-    class Patient
+   class Patient
     {
         //address, legal name, gender or contact number. 
 

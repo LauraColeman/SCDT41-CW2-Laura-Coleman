@@ -124,7 +124,7 @@ namespace CW22
         private void RecOptions()
         {
 
-            Console.WriteLine("Press 1 to VIEW PATIENTS.\n Press 2 to EDIT PATIENTS.\n Press 3 to BOOK APPOINTMENT. \n Press 4 to CANCEL APPOINTMENT.");
+            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to EDIT PATIENTS. Press 3 to BOOK APPOINTMENT. Press 4 to CANCEL APPOINTMENT.Press 5 to VIEW APPOINTMENTS. Press 6 to REQUEST USERNAME OR PASSWORD CHANGE");
             int x = int.Parse(Console.ReadLine());
             switch (x)
             {
@@ -178,7 +178,11 @@ namespace CW22
 
                     break;
 
+                case 6:
 
+                    RequestCredentials();
+
+                    break;
             }
 
 
@@ -186,14 +190,41 @@ namespace CW22
 
         }
 
-
-
-       
+     private  Dictionary<string, string> userTicks = new Dictionary<string, string>();
 
         
 
+
+
+        //Make accessible from Program.
+        public Dictionary<string, string> userTickets
+        {
+            get { return userTicks; }
+
+        }
+
+
+        public void RequestCredentials()
+        {
+            Console.WriteLine("Enter your name");
+            string name = Console.ReadLine();
+            Console.WriteLine("Do you want to change you username, password or both?");
+            string option = Console.ReadLine();
+            userTicks.Add(name, option);
+            Console.WriteLine("Thank you. Request sent to admin.");
+
+
+        }
+
+       
+
+
+
+
         private void EditPatients()
         {
+            
+
             Console.WriteLine("Press 1 to ADD PATIENTS. Press 2 to EDIT PATIENTS. Press 3 to DELETE PATIENTS.");
             string input = Console.ReadLine();
 
@@ -292,7 +323,7 @@ namespace CW22
       
 
 
-        private void AmendOptions()
+        public void AmendOptions()
         {
 
 

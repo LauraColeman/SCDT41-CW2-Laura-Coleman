@@ -247,7 +247,7 @@ namespace CW22
         {
             Appointment choice = new Appointment();
             Reception func = new Reception();
-            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS. Press 3 to ADD NOTES to Appointment");
+            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS. Press 3 to ADD NOTES to Appointment. Press 4 to REQUEST CHANGE CREDENTIALS");
             string select = Console.ReadLine();
 
             if (select == "1")
@@ -268,7 +268,10 @@ namespace CW22
                 choice.AddNotes();
             }
 
-
+            else if (select == "4")
+            {
+                func.RequestCredentials();
+            }
             else
             {
                 Console.WriteLine("Input not recognised, please try again.");
