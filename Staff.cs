@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
-namespace CW2
+
+namespace CW22
 {
     abstract class Staff
     {
@@ -63,5 +65,51 @@ namespace CW2
 
         }
 
+        public Staff()
+        {
+
+        }
+
+        //override to print objects of list, not just class/namespace name.
+        public override string ToString()
+        {
+            //calls lists
+            List<Nurse> nurseO = Nurse.nurse;
+            List<dentist> dentistsO = dentist.den;
+
+            //Prints
+            return "Name: " + staffName + "Practice: " + practice + "Room: " + room + "Username: " + username + "Password: " + password;
+
+        }
+        
+
+        //Method to view all patients.  
+        //Access list of patients and print contents.
+
+        public void ViewPatients()
+        {
+            List<Patient> patients = Patient.pats;
+
+            Type type = typeof(Patient);
+
+            // Loop over properties.
+            foreach (PropertyInfo propertyInfo in type.GetProperties())
+            {
+                Console.WriteLine(propertyInfo);
+
+
+
+            }
+
+
+
+
+
+        }
+
+
+        
+
+
     }
-}
+    }

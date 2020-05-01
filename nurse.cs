@@ -8,6 +8,8 @@ namespace CW2
 {
     class Nurse : Staff 
     {
+
+        
         //base to access constructor from Staff abstract class.
         public Nurse(string name, string practice, int room, string username, string password) :base(name, practice, room, username, password)
 
@@ -15,18 +17,51 @@ namespace CW2
             
         }
 
+        
+
+
+
+
+
+
+
+
         //constructor from abstract class
 
-        Nurse Nurse1 = new Nurse ("Jane Doe", "Taunton", 1, "jane","jane"); 
-        Nurse Nurse2 = new Nurse("Jane Doe", "Taunton", 2, "jane", "jane");
-        Nurse Nurse3 = new Nurse("Jane Doe", "Taunton", 3, "jane", "jane");
-        Nurse Nurse4 = new Nurse("Jane Doe", "Street", 1, "jane", "jane");
-        Nurse Nurse5 = new Nurse("Jane Doe", "Street", 2, "jane", "jane");
-        Nurse Nurse6 = new Nurse("Jane Doe", "Street", 3, "jane", "jane");
-        Nurse Nurse7 = new Nurse("Jane Doe", "Wells", 1, "jane", "jane");
-        Nurse Nurse8 = new Nurse("Jane Doe", "Wells", 2, "jane", "jane");
-        Nurse Nurse9 = new Nurse("Jane Doe", "Wells", 3, "jane", "jane");
+      
 
 
+
+
+        public void NurseLogIn()
+        {
+
+            //Login attempts counter
+            int Attempts = 0;
+
+            //Loop to limit login attempts into system.
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Enter username");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter password");
+                string password = Console.ReadLine();
+
+                if (username != userName && password != userPassword)
+                    Attempts++;
+                else
+                    break;
+            }
+
+            //Display the result
+            if (Attempts > 2)
+                Console.WriteLine("Login failure");
+            else
+                Console.WriteLine("Welcome {0}", staffName);
+
+            Console.ReadKey();
+
+        }
     }
+
 }
