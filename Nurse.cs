@@ -25,11 +25,7 @@ namespace CW22
         //List to store nurses
         private static List<Nurse> nurseStaff = new List<Nurse>();
 
-        Nurse nurse1 = new Nurse("Tester","Taunton",1,"Test","Test");
-        Nurse nurse2 = new Nurse("Nurse2","Street", 3,"two","two");
-
-
-
+       
 
         //Make accessible from Program.
         public static List<Nurse> nurse
@@ -38,7 +34,10 @@ namespace CW22
 
         }
 
-        
+
+
+
+        //FOR RECEPTIONIST
         //Method to edit nurse details and assign practice and room
         public void editNurse()
         {
@@ -159,41 +158,123 @@ namespace CW22
         public void deleteNur()
         {
             List<Nurse> nurseDel = Nurse.nurse;
+            
+            nurseDel.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
+
 
             //Retrieve and print list of patients names.
             foreach (var names in nurseDel.Select(d => d.staffName))
             {
                 Console.WriteLine(names);
             }
-
-
-
+            
             Console.WriteLine("Choose a nurse to Delete.");
             string deleteN = Console.ReadLine();
 
-            foreach (var o in nurse)
-            {
-                //if a match is found, object/patient will be removed from list.
+            
+                //if a match is found, object/patient will be removed from list.Overcomes casting error.
                 if (staffName == deleteN)
                 {
-                    nurseDel.Remove(o);
-
-
-                }
+                nurseDel.RemoveAll(x => x.staffName == deleteN);
+                Console.WriteLine("Staff successfully deleted from system.");
+                
+            }
 
                 else
                 {
                     Console.WriteLine("That name is not recognised, please try again.");
-                    deleteNur();
+                   
 
                 }
 
             }
+
+        public void LogIn()
+        {
+            //calls lists with login info
+            List<Nurse> nurseO = Nurse.nurse;
+            List<dentist> dentistsO = dentist.den;
+
+            //Test staff members
+            nurseO.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
+            nurseO.Add(new Nurse() { staffName = "Nurse2", staffPractice = "Street", staffRoom = 3, userName = "nursetwo", userPassword = "nursetwo" });
+
+
+            //Login attempts counter
+            int Attempts = 3;
+
+
+            //Loop to limit login attempts into system.
+            foreach (var staff in nurseO)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.WriteLine("Enter username");
+                    string user = Console.ReadLine();
+                    Console.WriteLine("Enter password");
+                    string pass = Console.ReadLine();
+
+                    if (user != userName || pass != userPassword)
+                        Attempts-=1;
+                    {
+                        Console.WriteLine("Incorrect details. {0} Attempts remaining", Attempts);
+
+                    }
+                   
+                }
+
+                //Display the result
+                if (Attempts > 2)
+                    Console.WriteLine("Login failure. Please close the programme and try again or contact an admin.");
+                else
+                    break;
+                    Console.WriteLine("Login successful. Welcome {0}");
+                    NurseFunctions();
+            }
+            
+        }
+
+        public void NurseFunctions()
+        {
+            Appointment choice = new Appointment();
+            Reception func = new Reception();
+            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to ADD NOTES to Appointment");
+            string select = Console.ReadLine();
+
+            if (select == "1")
+            {
+                func.ViewPatients();
+
+            }
+
+            //Allow additional option to be selected
+            else if (select == "2")
+            {
+                choice.AddNotes();
+
+            }
+
+
         }
 
 
+
+
+
+
+
     }
+
+
+
+
+
 }
+
+       
+    
+
+
 
 
 
