@@ -59,7 +59,7 @@ namespace CW22
 
                 case 1: //Name
 
-                    Console.WriteLine("Choose a Nurses' Name to Edit.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Name.");
                     string choice = Console.ReadLine();
 
 
@@ -73,14 +73,14 @@ namespace CW22
 
                          //LINQ to replace
                         nurseEd.First(d => d.staffName == choice).staffName = newName;
-
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
 
                 case 2: //Name
 
-                    Console.WriteLine("Choose a Nurses' Name to Edit Practice.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Practice.");
                     string choice2 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -88,17 +88,17 @@ namespace CW22
                     if (staffName.Contains(choice2))
                     {
 
-                        Console.WriteLine("Assign a new Practice");
+                        Console.WriteLine("Enter Nurses' FULL NAME to assign a new Practice");
                         string newPrac = Console.ReadLine();
 
                         nurseEd.First(d => d.staffName == choice2).staffPractice = newPrac;
-
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
                 case 3: //Name
 
-                    Console.WriteLine("Choose a Nurses' Name to Edit Room Assignment.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Room Assignment.");
                     string choice3 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -110,14 +110,14 @@ namespace CW22
                         int newRoom = Convert.ToInt32(Console.ReadLine());
 
                         nurseEd.First(d => d.staffName == choice3).staffRoom = newRoom;
-
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
 
                 case 4: //Name
 
-                    Console.WriteLine("Choose a Nurses' Name to Edit Username.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Username.");
                     string choice4 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -129,13 +129,13 @@ namespace CW22
                         string newUname = Console.ReadLine();
 
                         nurseEd.First(d => d.staffName == choice4).userName = newUname;
-
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
                 case 5: //Name
 
-                    Console.WriteLine("Choose a Nurses' Name to Edit their Password.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit their Password.");
                     string choice5 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -147,7 +147,7 @@ namespace CW22
                         string newPass = Console.ReadLine();
 
                         nurseEd.First(d => d.staffName == choice5).userPassword = newPass;
-
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
@@ -162,7 +162,7 @@ namespace CW22
             nurseDel.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
 
 
-            //Retrieve and print list of patients names.
+            //Retrieve and print list of Nurse names.
             foreach (var names in nurseDel.Select(d => d.staffName))
             {
                 Console.WriteLine(names);
@@ -202,10 +202,13 @@ namespace CW22
 
             //Login attempts counter
             int Attempts = 3;
+            
 
-
+            //Using reflection to get username and password values from objects.
+            Type typeOfMyObject = nurseO.GetType();
+            PropertyInfo[] properties = typeOfMyObject.GetProperties();
             //Loop to limit login attempts into system.
-            foreach (var staff in nurseO)
+            foreach (PropertyInfo staff in properties)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -214,7 +217,10 @@ namespace CW22
                     Console.WriteLine("Enter password");
                     string pass = Console.ReadLine();
 
-                    if (user != userName || pass != userPassword)
+                    object value = staff.GetValue(userName);
+                    object val = staff.GetValue(userPassword);
+
+                    if (user != Convert.ToString(value) || pass != Convert.ToString(val))
                         Attempts-=1;
                     {
                         Console.WriteLine("Incorrect details. {0} Attempts remaining", Attempts);
@@ -228,17 +234,20 @@ namespace CW22
                     Console.WriteLine("Login failure. Please close the programme and try again or contact an admin.");
                 else
                     break;
-                    Console.WriteLine("Login successful. Welcome {0}");
-                    NurseFunctions();
+                    Console.WriteLine("Login successful. Welcome {0}", userName);
+
+                Nurse tests = new Nurse();
+                NurseFunctions();
+                
             }
             
         }
 
-        public void NurseFunctions()
+        private void NurseFunctions()
         {
             Appointment choice = new Appointment();
             Reception func = new Reception();
-            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to ADD NOTES to Appointment");
+            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS. Press 3 to ADD NOTES to Appointment");
             string select = Console.ReadLine();
 
             if (select == "1")
@@ -247,14 +256,25 @@ namespace CW22
 
             }
 
-            //Allow additional option to be selected
+            
             else if (select == "2")
             {
-                choice.AddNotes();
+                choice.viewApps();
 
             }
 
+            else if (select == "3")
+            {
+                choice.AddNotes();
+            }
 
+
+            else
+            {
+                Console.WriteLine("Input not recognised, please try again.");
+                NurseFunctions();
+
+            }
         }
 
 

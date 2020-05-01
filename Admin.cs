@@ -56,6 +56,7 @@ namespace CW22
                 Console.WriteLine("Welcome {0}", aName);
 
             //Leads to menu of admin functions.
+            Console.WriteLine("Press 1 to ADD PRACTICE. Press 2 to DELETE PRACTICE. Press 3 to EDIT NURSES. Press 4 to EDIT DENTISTS.");
             AdminOptions();
         }
 

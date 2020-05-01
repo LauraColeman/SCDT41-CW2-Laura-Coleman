@@ -81,49 +81,7 @@ namespace CW22
             return "Name: " + staffName + "Practice: " + practice + "Room: " + room + "Username: " + username + "Password: " + password;
 
         }
-
-        //Shared method between Nurses and Dentists. Admin and receptionists have other functions contained in method/s.
-        public void LogIn()
-        {
-            //calls lists with login info
-            List<Nurse> nurseO = Nurse.nurse;
-            List<dentist> dentistsO = dentist.den;
-
-            //Test staff members
-            Nurse nurse1 = new Nurse("Tester", "Taunton", 1, "Test", "Test");
-            nurseO.Add(nurse1);
-            Nurse nurse2 = new Nurse("Nurse2", "Street", 3, "two", "two");
-            nurseO.Add(nurse2);
-
-
-            //Login attempts counter
-            int Attempts = 0;
-
-            //Loop to limit login attempts into system.
-            for (int i = 0; i < 3; i++)
-            {
-                Console.WriteLine("Enter username");
-                string username = Console.ReadLine();
-                Console.WriteLine("Enter password");
-                string password = Console.ReadLine();
-
-                if (username != userName && password != userPassword && Attempts > 0)
-                {
-                    Attempts +=1;
-
-                    Console.WriteLine("Login failure {0} Attempts Remaining", Attempts);
-                }
-                else
-                    break;
-
-                Console.WriteLine("Welcome {0}", username);
-
-            }
-
-            //Display the result
-
-
-        }
+        
 
         //Method to view all patients.  
         //Access list of patients and print contents.

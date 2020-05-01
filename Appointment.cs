@@ -47,7 +47,7 @@ namespace CW22
             List<Appointment> apps = Appointment.Booking;
 
             //Prints
-            return "Name: " + name + "Practice: " + practice + "Treatment: " + treatment + "Date: " + date + "Dentist: " + dent + "Notes: " + notes;
+            return "Name: " + name + "Practice: " + practice + "Treatment: " + treatment + "Date: " + date + "Dentist " + dent + "Notes: " + notes;
 
         }
 
@@ -68,7 +68,23 @@ namespace CW22
         
 
 
+        public void viewApps()
+        {
 
+            Appointment books = new Appointment("PATTWO", "Taunton", "Band 1", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only");
+
+
+            for (int i = 0; i < Books.Count; i++)
+            {
+
+                Console.WriteLine(Books.ToString());
+            }
+
+
+            
+
+
+        }
 
 
         public void Book()
@@ -97,6 +113,7 @@ namespace CW22
 
         public void AddNotes()
         {
+            //Adds test patient to list.
             Booking.Add(books);
 
             Console.WriteLine("Enter the FULL NAME of the patient whos appointment you wish to add notes");
@@ -113,13 +130,14 @@ namespace CW22
                 string sName = Console.ReadLine();
 
                 //LINQ to add note to object and timestamp
-                Booking.First(d => d.name == patient).notes = newNote + sName + DateTime.Now;
+                Booking.First(d => d.name == patient).notes = newNote + sName + DateTime.Now.ToString("hh:mm:ss");
 
             }
 
             else
             {
                 Console.WriteLine("Appointment could not be found, please try again");
+                AddNotes();
             }
 
 
@@ -145,7 +163,7 @@ namespace CW22
                 if (name == nameChoice)
                 {
                     apps.Remove(o);
-
+                    Console.WriteLine("Appointment for {0} Cancelled", nameChoice);
 
                 }
 

@@ -35,7 +35,7 @@ namespace CW22
             else if (choice == "2") //Nurses
             {
                 //calling list of nurses.
-
+                
                 Nurse nurseLog = new Nurse();
                 nurseLog.LogIn();
 
@@ -48,6 +48,7 @@ namespace CW22
                
                 dentist denLog = new dentist();
                 denLog.LogIn();
+                
 
 
 

@@ -121,7 +121,7 @@ namespace CW22
 
         //Receptionist functions
 
-        public void RecOptions()
+        private void RecOptions()
         {
 
             Console.WriteLine("Press 1 to VIEW PATIENTS.\n Press 2 to EDIT PATIENTS.\n Press 3 to BOOK APPOINTMENT. \n Press 4 to CANCEL APPOINTMENT.");
@@ -169,7 +169,14 @@ namespace CW22
 
                     break;
 
+                case 5: //VIEW APPS
 
+                    Appointment appView = new Appointment();
+                    appView.viewApps();
+
+
+
+                    break;
 
 
             }
@@ -185,7 +192,7 @@ namespace CW22
 
         
 
-        public void EditPatients()
+        private void EditPatients()
         {
             Console.WriteLine("Press 1 to ADD PATIENTS. Press 2 to EDIT PATIENTS. Press 3 to DELETE PATIENTS.");
             string input = Console.ReadLine();
@@ -214,7 +221,7 @@ namespace CW22
         }
 
 
-        public void AddPatient()
+        private void AddPatient()
         {
             //Calls list to add new user.
             List<Patient> patients = Patient.pats;
@@ -234,13 +241,14 @@ namespace CW22
             //Creates object from input
             Patient newPat = new Patient(fullName, newAddress, newPractice, newGender, newPhone);
             patients.Add(newPat);
+            ViewPatients();
 
 
 
         }
 
 
-        public void DeletePatient()
+        private void DeletePatient()
         {
             List<Patient> patients = Patient.pats;
             Console.WriteLine("Choose a Patient to Delete.");
@@ -262,8 +270,14 @@ namespace CW22
                     if (pName == choice)
                     {
                         patients.Remove(o);
+                        Console.WriteLine("Patient successfully removed");
 
 
+                    }
+                    else
+                    {
+                        Console.WriteLine("That patient is not recognised. Please try again.");
+                        DeletePatient();
                     }
 
                 }
@@ -278,7 +292,7 @@ namespace CW22
       
 
 
-        public void AmendOptions()
+        private void AmendOptions()
         {
 
 
@@ -286,12 +300,12 @@ namespace CW22
             Console.WriteLine("Press 1 for NAME. \n Press 2 for ADDRESS.\n Press 3 for PRACTICE \n press 4 for GENDER \n Press 5 for PHONE NUMBER");
             Console.ReadLine();
 
-            //Retrieve and print list of patients names.
-            foreach (var names in pats.Select(d => d.pName))
+            //Retrieve and print list of patients details.
+            foreach (var names in pats)
             {
-                Console.WriteLine(pName);
+                Console.WriteLine(names);
             }
-            Console.WriteLine("\n");
+            
 
 
             int x = int.Parse(Console.ReadLine());
@@ -301,7 +315,7 @@ namespace CW22
                 case 1: //Name
 
                   
-                    Console.WriteLine("Choose a Patients Name to Edit.");
+                    Console.WriteLine("Enter the FULL NAME of the patient to edit their name.");
                     
                     string choice = Console.ReadLine();
 
@@ -310,10 +324,11 @@ namespace CW22
                     if (pName.Contains(choice))
                     {
 
-                        Console.WriteLine("Assign a new Practice");
+                        Console.WriteLine("Enter new name");
                         string newPname = Console.ReadLine();
 
                         pats.First(d => d.pName == choice).pName = newPname;
+                        Console.WriteLine("Details chnaged sucessfully");
 
                     }
 
@@ -325,7 +340,7 @@ namespace CW22
                 case 2://Address
 
                    
-                    Console.WriteLine("Choose a Patients Address to Edit.");
+                    Console.WriteLine("Enter the FULL NAME of the patient to edit their address.");
                     string choice2 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -333,7 +348,7 @@ namespace CW22
                     if (pName.Contains(choice2))
                     {
 
-                        Console.WriteLine("Assign a new Practice");
+                        Console.WriteLine("Enter new address");
                         string newAddr = Console.ReadLine();
 
                         pats.First(d => d.pName == choice2).pAddr = newAddr;
@@ -347,7 +362,7 @@ namespace CW22
                 case 3://Practice
 
                  
-                    Console.WriteLine("Choose a Patient to edit their Practice.");
+                    Console.WriteLine("Enter the FULL NAME of the patient to edit their Practice.");
                     string choice3 = Console.ReadLine();
 
                     if (pName.Contains(choice3))
@@ -365,13 +380,13 @@ namespace CW22
 
                 case 4://Gender
 
-                    Console.WriteLine("Choose a Patient to edit their Gender.");
+                    Console.WriteLine("Enter the FULL NAME of the patient to edit their Gender.");
                     string choice4 = Console.ReadLine();
 
                     if (pName.Contains(choice4))
                     {
 
-                        Console.WriteLine("Assign a new Practice");
+                        Console.WriteLine("Enter new gender");
                         string newGen = Console.ReadLine();
 
                         pats.First(d => d.pName == choice4).Gender = newGen;
@@ -383,20 +398,21 @@ namespace CW22
                 case 5://Phone
 
                    
-                    Console.WriteLine("Choose a Patient to edit their Phone Number.");
+                    Console.WriteLine("Enter the FULL NAME of the patient to edit their Phone Number.");
                     string choice5 = Console.ReadLine();
 
                     if (pName.Contains(choice5))
                     {
 
-                        Console.WriteLine("Enter the Phone Number of the patient");
+                        Console.WriteLine("Enter the new Phone Number of the patient");
                         string newPhone = Console.ReadLine();
 
                         pats.First(d => d.pName == choice5).Phone = newPhone;
 
                     }
 
-
+                    //For the purpose of testing patients have been edited
+                    //ViewPatients();
 
                     break;
 
@@ -404,6 +420,12 @@ namespace CW22
             }
 
         }
+
+
+
+
+
+
     }
 }
 

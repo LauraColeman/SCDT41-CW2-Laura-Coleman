@@ -27,7 +27,7 @@ namespace CW22
         public string Phone { get => phone; set => phone = value; }
 
 
-        //Override to print list of objects instead of class name
+        //Override to print list of objects instead of class name into console.
 
         public override string ToString()
         {
@@ -52,6 +52,8 @@ namespace CW22
         {
         }
 
+
+        //Allow list to be accessed from other classes
         private static List<Patient> patients = new List<Patient>();
 
        

@@ -35,6 +35,8 @@ namespace CW22
             practiceInfo.Add(key, val); //adds input to dictionary.
 
 
+            //Testing purpose to see practice has been added
+            //viewPractice();
         }
 
 
@@ -53,7 +55,7 @@ namespace CW22
 
         public void deletePractice()
         {
-            Console.WriteLine("Choose a Practice to DELETE.");
+            Console.WriteLine("Enter practice LOCATION to DELETE.");
 
             //Retrieve and print list of patients names.
             foreach (var pair in practiceInfo)
@@ -78,6 +80,7 @@ namespace CW22
             {
 
                 Console.WriteLine("That practice does not exist, please try again.");
+                deletePractice();
             }
 
         }

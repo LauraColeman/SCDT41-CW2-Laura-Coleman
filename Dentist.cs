@@ -32,8 +32,68 @@ namespace CW22
 
         }
 
+
+        //Log In
+        public void LogIn()
+        {
+            //calls lists with login info
+            
+            List<dentist> dentistsO = dentist.den;
+
+            //Test staff members
+            dentistsO.Add(new dentist() { staffName = "dOne", staffPractice = "Taunton", staffRoom = 1, userName = "done", userPassword = "done" });
+            dentistsO.Add(new dentist() { staffName = "dTwo", staffPractice = "Street", staffRoom = 3, userName = "dtwo", userPassword = "dtwo" });
+
+
+            //Login attempts counter
+            int Attempts = 3;
+
+
+            //Using reflection to get username and password values from objects.
+            Type typeOfMyObject = dentistsO.GetType();
+            PropertyInfo[] properties = typeOfMyObject.GetProperties();
+            //Loop to limit login attempts into system.
+            foreach (PropertyInfo staff in properties)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.WriteLine("Enter username");
+                    string user = Console.ReadLine();
+                    Console.WriteLine("Enter password");
+                    string pass = Console.ReadLine();
+
+                    object value = staff.GetValue(userName);
+                    object val = staff.GetValue(userPassword);
+
+                    if (user != Convert.ToString(value) || pass != Convert.ToString(val))
+                        Attempts -= 1;
+                    {
+                        Console.WriteLine("Incorrect details. {0} Attempts remaining", Attempts);
+
+                    }
+
+                }
+
+                //Display the result
+                if (Attempts > 2)
+                    Console.WriteLine("Login failure. Please close the programme and try again or contact an admin.");
+                else
+                    break;
+                Console.WriteLine("Login successful. Welcome {0}", userName);
+
+                //Leads to options dentists can access
+                dentist tests = new dentist();
+                denFunctions();
+
+            }
+
+        }
+
+
+
         //Edit dentists
-        //Method to edit nurse details and assign practice and room
+        //Method to edit dentist details and assign practice and room
+        //public to be accessed by dentist
         public void editDen()
         {
             List<dentist> denEd = dentist.den;
@@ -183,5 +243,42 @@ namespace CW22
 
             }
         }
+
+        public void denFunctions()
+        {
+            Appointment choice = new Appointment();
+            Reception func = new Reception();
+            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS .Press 3 to ADD NOTES to Appointment");
+            string select = Console.ReadLine();
+
+            if (select == "1")
+            {
+                func.ViewPatients();
+
+            }
+
+
+            else if (select == "2")
+            {
+                choice.viewApps();
+
+            }
+            //Allow additional option to be selected
+            else if (select == "3")
+            {
+                choice.AddNotes();
+
+            }
+
+            else
+            {
+                Console.WriteLine("Input not recognised, please try again.");
+                denFunctions();
+
+            }
+        }
+
+
+
     }
 }
