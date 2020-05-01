@@ -10,9 +10,7 @@ namespace CW22
 {
     class Program
     {
-
-
-
+        
 
         static void Main(string[] args)
         {

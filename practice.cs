@@ -72,8 +72,8 @@ namespace CW22
 
                 //if a match is found, practice will be removed from dictionary.
 
-                practiceInfo.Remove(key);
-                Console.WriteLine("Practice {0} Deleted", pChoice);
+                practiceInfo.Remove(pChoice);
+                Console.WriteLine("Practice Deleted");
             }
 
             else
