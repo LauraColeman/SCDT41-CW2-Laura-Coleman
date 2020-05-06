@@ -10,9 +10,7 @@ namespace CW22
 {
     class Program
     {
-
-
-
+        
 
         static void Main(string[] args)
         {
@@ -34,21 +32,27 @@ namespace CW22
 
             else if (choice == "2") //Nurses
             {
-                //calling list of nurses.
-                
-                Nurse nurseLog = new Nurse();
-                nurseLog.LogIn();
+                //Issues with login loop. Talk about in eval.
+                //Create new dentist objects to be logged in..
+                //Need to be added to list to be edited.
+                Nurse Nurse1 = new Nurse("Jane Doe", "Taunton", 1, "jane", "jane");
+                Nurse Nurse2 = new Nurse("Jane Two", "Taunton", 2, "janetwo", "janetwo");
 
-
+                //Test Log In Works. Details would need to be looped through to prevent requiring every nurse to log in.
+                Nurse1.NurseLogIn();
 
             }
 
             else if (choice == "3") //Dentist
             {
-               
-                dentist denLog = new dentist();
-                denLog.LogIn();
-                
+                //Issues with login loop. Talk about in eval.
+                //Create new dentist objects to be logged in..
+
+                dentist den1 = new dentist("Dennis Doe", "Taunton", 1, "dennis", "dennis");
+                dentist den2 = new dentist("Dennis Two", "Taunton", 2, "dennistwo", "dennistwo");
+
+                den1.DentistLogIn();
+
 
 
 

@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace CW22
 {
-    class Admin
+   class Admin
     {
         private string aName;
         private string aUsername;
@@ -23,6 +23,10 @@ namespace CW22
             this.aUsername = username;
             this.aPassword = password;
 
+        }
+
+        public Admin()
+        {
         }
 
 
@@ -56,7 +60,7 @@ namespace CW22
                 Console.WriteLine("Welcome {0}", aName);
 
             //Leads to menu of admin functions.
-            Console.WriteLine("Press 1 to ADD PRACTICE. Press 2 to DELETE PRACTICE. Press 3 to EDIT NURSES. Press 4 to EDIT DENTISTS.");
+            Console.WriteLine("Press 1 to ADD PRACTICE. Press 2 to DELETE PRACTICE. Press 3 to EDIT NURSES. Press 4 to EDIT DENTISTS. Press 5 to VIEW CREDENTIAL CHANGE REQUESTS");
             AdminOptions();
         }
 
@@ -97,7 +101,12 @@ namespace CW22
 
                     break;
 
+                case 5://View tickets requesting change in credentials
 
+                    
+                    ViewCredentials();
+
+                    break;
 
             }
 
@@ -107,6 +116,7 @@ namespace CW22
 
 
         }
+
 
 
         public void dentistOption()
@@ -230,9 +240,54 @@ namespace CW22
 
         }
 
-       
+
+        //Allows admin to view and delete tickets.
+        private void ViewCredentials()
+        {
+            //Calls dictionary from Reception Class
+            Reception cred = new Reception();
+            Dictionary<string, string> userTic = cred.userTickets;
+
+            foreach (var pair in userTic)
+            {
+                Console.WriteLine("{0}, {1}.", pair.Key, pair.Value);
+
             }
+
+            Console.WriteLine("Delete Tickets? y or n");
+            string opt = Console.ReadLine();
+
+            if (opt == "y")
+            {
+                Console.WriteLine("Enter practice LOCATION to DELETE.");
+                string tChoice = Console.ReadLine();
+
+                if(userTic.ContainsKey(tChoice))
+                {
+                    userTic.Remove(tChoice);
+
+                }
+
+                else
+                {
+                    Console.WriteLine("Ticket not recognised. Please try again.");
+                    ViewCredentials();
+                }
+                
+            }
+                    else if (opt == "n")
+            {
+                Console.WriteLine("Thank You. Goodbye.");
+
+            }
+
+        }
+
+
+
+
     }
+}
 
 
 
