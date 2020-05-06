@@ -34,58 +34,41 @@ namespace CW22
 
 
         //Log In
-        public void LogIn()
+
+        public void DentistLogIn()
         {
-            //calls lists with login info
-            
-            List<dentist> dentistsO = dentist.den;
-
-            //Test staff members
-            dentistsO.Add(new dentist() { staffName = "dOne", staffPractice = "Taunton", staffRoom = 1, userName = "done", userPassword = "done" });
-            dentistsO.Add(new dentist() { staffName = "dTwo", staffPractice = "Street", staffRoom = 3, userName = "dtwo", userPassword = "dtwo" });
-
 
             //Login attempts counter
             int Attempts = 3;
 
-
-            //Using reflection to get username and password values from objects.
-            Type typeOfMyObject = dentistsO.GetType();
-            PropertyInfo[] properties = typeOfMyObject.GetProperties();
             //Loop to limit login attempts into system.
-            foreach (PropertyInfo staff in properties)
+            for (int i = 0; i < 3; i++)
             {
-                for (int i = 0; i < 3; i++)
+                Console.WriteLine("Enter username");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter password");
+                string password = Console.ReadLine();
+
+
+                //Takes 1 off the account number. Displays attempts remaining. Programme ends when 0 is reached.
+                if (username != userName && password != userPassword)
                 {
-                    Console.WriteLine("Enter username");
-                    string user = Console.ReadLine();
-                    Console.WriteLine("Enter password");
-                    string pass = Console.ReadLine();
-
-                    object value = staff.GetValue(userName);
-                    object val = staff.GetValue(userPassword);
-
-                    if (user != Convert.ToString(value) || pass != Convert.ToString(val))
-                        Attempts -= 1;
-                    {
-                        Console.WriteLine("Incorrect details. {0} Attempts remaining", Attempts);
-
-                    }
+                    Attempts -= 1;
+                    Console.WriteLine("Incorrect username or password. {0} Attempts Remaining.", Attempts);
 
                 }
-
-                //Display the result
-                if (Attempts > 2)
-                    Console.WriteLine("Login failure. Please close the programme and try again or contact an admin.");
-                else
-                    break;
-                Console.WriteLine("Login successful. Welcome {0}", userName);
-
-                //Leads to options dentists can access
-                dentist tests = new dentist();
-                denFunctions();
-
+                else { break; }
             }
+
+            //Display the result
+            if (Attempts == 0)
+                Console.WriteLine("Login failure. Restart the programme or contact an admin to reset your username and password.");
+            else
+                Console.WriteLine("Welcome {0}", staffName, staffPractice);
+            denFunctions();
+
+
+            Console.ReadKey();
 
         }
 

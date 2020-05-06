@@ -16,7 +16,7 @@ namespace CW22
         public Nurse(string name, string practice, int room, string username, string password) : base(name, practice, room, username, password)
 
         {
-         }
+        }
 
         public Nurse()
         {
@@ -25,7 +25,7 @@ namespace CW22
         //List to store nurses
         private static List<Nurse> nurseStaff = new List<Nurse>();
 
-       
+
 
         //Make accessible from Program.
         public static List<Nurse> nurse
@@ -71,7 +71,7 @@ namespace CW22
                         Console.WriteLine("Enter a new Name");
                         string newName = Console.ReadLine();
 
-                         //LINQ to replace
+                        //LINQ to replace
                         nurseEd.First(d => d.staffName == choice).staffName = newName;
                         Console.WriteLine("Nurse {0} details updated", staffName);
                     }
@@ -158,7 +158,7 @@ namespace CW22
         public void deleteNur()
         {
             List<Nurse> nurseDel = Nurse.nurse;
-            
+
             nurseDel.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
 
 
@@ -167,81 +167,79 @@ namespace CW22
             {
                 Console.WriteLine(names);
             }
-            
+
             Console.WriteLine("Choose a nurse to Delete.");
             string deleteN = Console.ReadLine();
 
-            
-                //if a match is found, object/patient will be removed from list.Overcomes casting error.
-                if (staffName == deleteN)
-                {
+
+            //if a match is found, object/patient will be removed from list.Overcomes casting error.
+            if (staffName == deleteN)
+            {
                 nurseDel.RemoveAll(x => x.staffName == deleteN);
                 Console.WriteLine("Staff successfully deleted from system.");
-                
-            }
-
-                else
-                {
-                    Console.WriteLine("That name is not recognised, please try again.");
-                   
-
-                }
 
             }
 
-        public void LogIn()
+            else
+            {
+                Console.WriteLine("That name is not recognised, please try again.");
+
+
+            }
+
+        }
+
+
+        //calls lists with login info
+        //Following 4 lines Ultimately failed to work for log in and had to be called from programme
+        //List<Nurse> nurseO = Nurse.nurse;
+        // List<dentist> dentistsO = dentist.den;
+
+        //Test staff members
+        // nurseO.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
+        // nurseO.Add(new Nurse() { staffName = "Nurse2", staffPractice = "Street", staffRoom = 3, userName = "nursetwo", userPassword = "nursetwo" });
+
+            //FINAL LOG IN
+        //Login attempts counter
+        
+
+        public void NurseLogIn()
         {
-            //calls lists with login info
-            List<Nurse> nurseO = Nurse.nurse;
-            List<dentist> dentistsO = dentist.den;
-
-            //Test staff members
-            nurseO.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
-            nurseO.Add(new Nurse() { staffName = "Nurse2", staffPractice = "Street", staffRoom = 3, userName = "nursetwo", userPassword = "nursetwo" });
-
 
             //Login attempts counter
             int Attempts = 3;
-            
 
-            //Using reflection to get username and password values from objects.
-            Type typeOfMyObject = nurseO.GetType();
-            PropertyInfo[] properties = typeOfMyObject.GetProperties();
             //Loop to limit login attempts into system.
-            foreach (PropertyInfo staff in properties)
+            for (int i = 0; i < 3; i++)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    Console.WriteLine("Enter username");
-                    string user = Console.ReadLine();
-                    Console.WriteLine("Enter password");
-                    string pass = Console.ReadLine();
+                Console.WriteLine("Enter username");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter password");
+                string password = Console.ReadLine();
 
-                    object value = staff.GetValue(userName);
-                    object val = staff.GetValue(userPassword);
 
-                    if (user != Convert.ToString(value) || pass != Convert.ToString(val))
-                        Attempts-=1;
-                    {
-                        Console.WriteLine("Incorrect details. {0} Attempts remaining", Attempts);
-
-                    }
-                   
-                }
-
-                //Display the result
-                if (Attempts > 2)
-                    Console.WriteLine("Login failure. Please close the programme and try again or contact an admin.");
-                else
-                    break;
-                    Console.WriteLine("Login successful. Welcome {0}", userName);
-
-                Nurse tests = new Nurse();
-                NurseFunctions();
+                //Takes 1 off the account number. Displays attempts remaining. Programme ends when 0 is reached.
+                if (username != userName && password != userPassword)
+                { 
+                Attempts -= 1;
+                Console.WriteLine("Incorrect username or password. {0} Attempts Remaining.", Attempts);
                 
+                    }
+                else { break; }
             }
-            
+
+            //Display the result
+            if (Attempts == 0)
+                Console.WriteLine("Login failure. Restart the programme or contact an admin to reset your username and password.");
+            else
+                Console.WriteLine("Welcome {0}", staffName, staffPractice);
+                NurseFunctions();
+
+
+            Console.ReadKey();
+
         }
+        
 
         private void NurseFunctions()
         {
@@ -256,7 +254,7 @@ namespace CW22
 
             }
 
-            
+
             else if (select == "2")
             {
                 choice.viewApps();
@@ -283,7 +281,7 @@ namespace CW22
 
 
 
-
+    }
 
 
     }
@@ -292,7 +290,7 @@ namespace CW22
 
 
 
-}
+
 
        
     
