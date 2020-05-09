@@ -159,7 +159,7 @@ namespace CW22
         {
             List<Nurse> nurseDel = Nurse.nurse;
 
-            nurseDel.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
+            nurseDel.Add(new Nurse("Test","Test",2, "Testdel", "Testdel"));
 
 
             //Retrieve and print list of Nurse names.
@@ -172,8 +172,8 @@ namespace CW22
             string deleteN = Console.ReadLine();
 
 
-            //if a match is found, object/patient will be removed from list.Overcomes casting error.
-            if (staffName == deleteN)
+            //if a match is found, object/patient will be removed from list.
+            if (deleteN == staffName)
             {
                 nurseDel.RemoveAll(x => x.staffName == deleteN);
                 Console.WriteLine("Staff successfully deleted from system.");

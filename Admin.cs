@@ -213,8 +213,15 @@ namespace CW22
 
             //call nurse list and add inputted values
             List<Nurse> nurse = Nurse.nurse;
-            Nurse newNurse = new Nurse(fullName, newPractice, newRoom, newUsername, newPassword);
-            nurse.Add(newNurse);
+            
+            nurse.Add(new Nurse(fullName, newPractice, newRoom, newUsername, newPassword));
+
+            //Test that nurse is added
+            foreach (var author in nurse)
+            {
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", fullName, newPractice, newRoom, newUsername, newPassword);
+            }
+
 
         }
 
