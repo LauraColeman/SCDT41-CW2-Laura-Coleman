@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
-namespace CW22
+namespace SCDT41CW
 {
     class Appointment
     {
@@ -40,16 +39,6 @@ namespace CW22
         }
 
 
-        //Override to print objects
-        public override string ToString()
-        {
-            //calls dictionary
-            List<Appointment> apps = Appointment.Booking;
-
-            //Prints
-            return "Name: " + name + "Practice: " + practice + "Treatment: " + treatment + "Date: " + date + "Dentist " + dent + "Notes: " + notes;
-
-        }
 
         //Store appointments and reference and access with key
 
@@ -64,14 +53,14 @@ namespace CW22
         }
 
         //dummy data
-        Appointment books = new Appointment("PATTWO", "Taunton", "Band 1", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only");
-        
+
+
 
 
         public void viewApps()
         {
 
-            Appointment books = new Appointment("PATTWO", "Taunton", "Band 1", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only");
+            Books.Add(new Appointment("PATTWO", "Taunton", "Band 1", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only"));
 
 
             for (int i = 0; i < Books.Count; i++)
@@ -81,7 +70,7 @@ namespace CW22
             }
 
 
-            
+
 
 
         }
@@ -103,7 +92,7 @@ namespace CW22
 
             //Creates new appointment object and adds to dictionary.
             //Notes left null to restrict access to receptionist.
-            Appointment books = new Appointment(Name = name, Practice = prac, treatment = treat, date = day, Dent = dnt, notes = "Notes for Nurses/Dentists only");
+            Books.Add(new Appointment(name,prac,treat,day,dnt, notes = "Notes for Nurses/Dentists only"));
 
 
 
@@ -113,11 +102,30 @@ namespace CW22
 
         public void AddNotes()
         {
-            //Adds test patient to list.
-            Booking.Add(books);
+            //Adds test patient appointments to list.
+            Books.Add(new Appointment("PATTWO", "Taunton", "Band 1", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only"));
+
+            Books.Add(new Appointment("PATTWO", "Taunton", "Band 2", "20/07/2020, 12:00", "dTWO", "Notes for Nurses/Dentists only"));
+
+            Books.Add(new Appointment("PATTHREE", "Street", "Band 3", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only"));
 
             Console.WriteLine("Enter the FULL NAME of the patient whos appointment you wish to add notes");
+            Console.WriteLine();
+
+            //Loop to print list to select from. 
+            foreach (var p in Books)
+            {
+
+                Console.WriteLine("Appointment: {0},{1},{2},{3},{4}", p.Name, p.Practice, p.Treatment, p.Date, p.Dent, p.Notes);
+            }
+
+            Console.WriteLine();
+
             string patient = Console.ReadLine();
+
+          
+
+          
 
             //Checks if patient exists and return appointment
 
@@ -176,5 +184,8 @@ namespace CW22
 
             }
         }
+
+
+
     }
 }

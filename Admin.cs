@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Reflection;
 
-namespace CW22
+namespace SCDT41CW
 {
-   class Admin
+    class Admin
     {
         private string aName;
         private string aUsername;
@@ -103,7 +103,7 @@ namespace CW22
 
                 case 5://View tickets requesting change in credentials
 
-                    
+
                     ViewCredentials();
 
                     break;
@@ -121,7 +121,7 @@ namespace CW22
 
         public void dentistOption()
         {
-            dentist test = new dentist();
+            Dentist test = new Dentist();
             Console.WriteLine("Press 1 to ADD Dentist");
             Console.WriteLine("Press 2 to EDIT Dentist");
             Console.WriteLine("Press 3 to DELETE Dentist");
@@ -129,20 +129,20 @@ namespace CW22
 
             if (denChoice == "1")
             {
-                AddDentist();
+                test.AddDen();
 
             }
 
             else if (denChoice == "2")
             {
-                
+
                 test.editDen();
 
             }
 
             else if (denChoice == "3")
             {
-                test.deleteDen();
+                test.deleteDentist();
             }
 
             else
@@ -165,13 +165,13 @@ namespace CW22
 
             if (nurChoice == "1")
             {
-                AddNurse();
+                test.AddNurse();
 
             }
 
             else if (nurChoice == "2")
             {
-               
+
                 test.editNurse();
 
 
@@ -196,64 +196,13 @@ namespace CW22
 
 
 
-        public void AddNurse()
-        {
-
-
-            Console.WriteLine("Enter NAME of new User");
-            string fullName = Console.ReadLine();
-            Console.WriteLine("Enter PRACTICE of new User");
-            string newPractice = Console.ReadLine();
-            Console.WriteLine("Enter ROOM of new User");
-            int newRoom = Convert.ToInt32(Console.ReadLine()); //cast to accept int
-            Console.WriteLine("Enter USERNAME of new User");
-            string newUsername = Console.ReadLine();
-            Console.WriteLine("Enter PASSWORD NUMBER of new User");
-            string newPassword = Console.ReadLine();
-
-            //call nurse list and add inputted values
-            List<Nurse> nurse = Nurse.nurse;
-            
-            nurse.Add(new Nurse(fullName, newPractice, newRoom, newUsername, newPassword));
-
-            //Test that nurse is added
-            foreach (var author in nurse)
-            {
-                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", fullName, newPractice, newRoom, newUsername, newPassword);
-            }
-
-
-        }
-
-        public void AddDentist()
-        {
-
-
-            Console.WriteLine("Enter NAME of new User");
-            string fullName = Console.ReadLine();
-            Console.WriteLine("Enter PRACTICE of new User");
-            string newPractice = Console.ReadLine();
-            Console.WriteLine("Enter ROOM of new User");
-            int newRoom = Convert.ToInt32(Console.ReadLine()); //cast to accept int
-            Console.WriteLine("Enter USERNAME of new User");
-            string newUsername = Console.ReadLine();
-            Console.WriteLine("Enter PASSWORD NUMBER of new User");
-            string newPassword = Console.ReadLine();
-
-            //call nurse list and add inputted values
-            List<dentist> dentists = dentist.den;
-            dentist newDen = new dentist(fullName, newPractice, newRoom, newUsername, newPassword);
-            dentists.Add(newDen);
-
-        }
-
 
         //Allows admin to view and delete tickets.
         private void ViewCredentials()
         {
             //Calls dictionary from Reception Class
-            Reception cred = new Reception();
-            Dictionary<string, string> userTic = cred.userTickets;
+            Nurse nur = new Nurse();
+            Dictionary<string, string> userTic = nur.userTickets;
 
             foreach (var pair in userTic)
             {
@@ -269,7 +218,7 @@ namespace CW22
                 Console.WriteLine("Enter practice LOCATION to DELETE.");
                 string tChoice = Console.ReadLine();
 
-                if(userTic.ContainsKey(tChoice))
+                if (userTic.ContainsKey(tChoice))
                 {
                     userTic.Remove(tChoice);
 
@@ -280,9 +229,9 @@ namespace CW22
                     Console.WriteLine("Ticket not recognised. Please try again.");
                     ViewCredentials();
                 }
-                
+
             }
-                    else if (opt == "n")
+            else if (opt == "n")
             {
                 Console.WriteLine("Thank You. Goodbye.");
 
@@ -295,6 +244,7 @@ namespace CW22
 
     }
 }
+
 
 
 

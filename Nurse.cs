@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections;
-using System.Reflection;
 
-namespace CW22
+namespace SCDT41CW
 {
     class Nurse : Staff
     {
@@ -22,35 +20,117 @@ namespace CW22
         {
         }
 
-        //List to store nurses
-        private static List<Nurse> nurseStaff = new List<Nurse>();
-
-
-
-        //Make accessible from Program.
-        public static List<Nurse> nurse
+        private static List<Nurse> NurseList = new List<Nurse>();
+        public static List<Nurse> nurses
         {
-            get { return nurseStaff; }
+            get { return NurseList; }
 
         }
 
 
+
+        public void NurseLogIn()
+        {
+
+            //Login attempts counter
+            int Attempts = 3;
+
+            //Loop to limit login attempts into system.
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Enter username");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter password");
+                string password = Console.ReadLine();
+
+
+                //Takes 1 off the account number. Displays attempts remaining. Programme ends when 0 is reached.
+                if (username != userName && password != userPassword)
+                {
+                    Attempts -= 1;
+                    Console.WriteLine("Incorrect username or password. {0} Attempts Remaining.", Attempts);
+
+                }
+                else { break; }
+            }
+
+            //Display the result
+            if (Attempts == 0)
+                Console.WriteLine("Login failure. Restart the programme or contact an admin to reset your username and password.");
+            else
+                Console.WriteLine("Welcome {0}", staffName, staffPractice);
+            NurseFunctions();
+
+
+            Console.ReadKey();
+
+        }
+        
+
+        public void Add()
+        {
+
+            List<Nurse> NurseList = new List<Nurse>();
+
+           
+
+            foreach (var nur in NurseList)
+            {
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", nur.staffName, nur.staffPractice, nur.staffRoom, nur.userName, nur.userPassword);
+            }
+
+        }
+
+        public void deleteNur()
+        {
+            
+
+           NurseList.Add(new Nurse("Test", "Test", 2, "Testdel", "Testdel"));
+
+
+            //Retrieve and print list of Nurse names.
+            foreach (var names in NurseList.Select(d => d.staffName))
+            {
+                Console.WriteLine(names);
+            }
+
+            Console.WriteLine("Choose a nurse to Delete.");
+            string deleteN = Console.ReadLine();
+
+            if (NurseList.Any(x => x.staffName == deleteN))
+            {  //Single ensures staff with same name but different details remain.
+                NurseList.Single(x => x.staffName == deleteN);
+                Console.WriteLine("Staff successfully deleted from system.");
+            }
+
+
+            else
+            {
+                Console.WriteLine("That name is not recognised, please try again.");
+
+
+            }
+
+        }
 
 
         //FOR RECEPTIONIST
         //Method to edit nurse details and assign practice and room
         public void editNurse()
         {
-            List<Nurse> nurseEd = Nurse.nurse;
+            
+            //Testdata. Adds nurses to list
+            NurseList.Add(new Nurse("Test", "Taunton", 3, "Test", "Test"));
+            NurseList.Add(new Nurse("Two", "Street", 2, "Two", "Two"));
 
             Console.WriteLine("What details would you like to edit?");
             Console.WriteLine("Press 1 for NAME. \n Press 2 for PRACTICE.\n Press 3 for ROOM \n press 4 for USERNAME \n Press 5 for PASSWORD");
 
             //Displays details of nurses to edit.
 
-            foreach (var names in nurseEd)
+            foreach (var nur in NurseList)
             {
-                Console.WriteLine(names);
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", nur.staffName, nur.staffPractice, nur.staffRoom, nur.userName, nur.userPassword);
             }
 
             int x = int.Parse(Console.ReadLine());
@@ -72,7 +152,7 @@ namespace CW22
                         string newName = Console.ReadLine();
 
                         //LINQ to replace
-                        nurseEd.First(d => d.staffName == choice).staffName = newName;
+                        NurseList.First(d => d.staffName == choice).staffName = newName;
                         Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
@@ -91,7 +171,7 @@ namespace CW22
                         Console.WriteLine("Enter Nurses' FULL NAME to assign a new Practice");
                         string newPrac = Console.ReadLine();
 
-                        nurseEd.First(d => d.staffName == choice2).staffPractice = newPrac;
+                        NurseList.First(d => d.staffName == choice2).staffPractice = newPrac;
                         Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
@@ -109,7 +189,7 @@ namespace CW22
                         Console.WriteLine("Assign a new Room");
                         int newRoom = Convert.ToInt32(Console.ReadLine());
 
-                        nurseEd.First(d => d.staffName == choice3).staffRoom = newRoom;
+                        NurseList.First(d => d.staffName == choice3).staffRoom = newRoom;
                         Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
@@ -128,7 +208,7 @@ namespace CW22
                         Console.WriteLine("Assign a new Username");
                         string newUname = Console.ReadLine();
 
-                        nurseEd.First(d => d.staffName == choice4).userName = newUname;
+                        NurseList.First(d => d.staffName == choice4).userName = newUname;
                         Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
@@ -146,7 +226,7 @@ namespace CW22
                         Console.WriteLine("Assign a new Password");
                         string newPass = Console.ReadLine();
 
-                        nurseEd.First(d => d.staffName == choice5).userPassword = newPass;
+                        NurseList.First(d => d.staffName == choice5).userPassword = newPass;
                         Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
@@ -155,118 +235,66 @@ namespace CW22
 
         }
 
-        public void deleteNur()
+
+        public void AddNurse()
         {
-            List<Nurse> nurseDel = Nurse.nurse;
-
-            nurseDel.Add(new Nurse("Test","Test",2, "Testdel", "Testdel"));
 
 
-            //Retrieve and print list of Nurse names.
-            foreach (var names in nurseDel.Select(d => d.staffName))
+            Console.WriteLine("Enter NAME of new User");
+            string fullName = Console.ReadLine();
+            Console.WriteLine("Enter PRACTICE of new User");
+            string newPractice = Console.ReadLine();
+            Console.WriteLine("Enter ROOM of new User");
+            int newRoom = Convert.ToInt32(Console.ReadLine()); //cast to accept int
+            Console.WriteLine("Enter USERNAME of new User");
+            string newUsername = Console.ReadLine();
+            Console.WriteLine("Enter PASSWORD NUMBER of new User");
+            string newPassword = Console.ReadLine();
+
+
+            NurseList.Add(new Nurse(fullName, newPractice, newRoom, newUsername, newPassword));
+
+            //Test that nurse is added
+            foreach (var nur in NurseList)
             {
-                Console.WriteLine(names);
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", nur.staffName, nur.staffPractice, nur.staffRoom, nur.userName, nur.userPassword);
+
             }
 
-            Console.WriteLine("Choose a nurse to Delete.");
-            string deleteN = Console.ReadLine();
-
-            if (nurseDel.Any(x => x.staffName == deleteN))
-            {  //Single ensures staff with same name but different details remain.
-                nurseDel.Single(x => x.staffName == deleteN);
-                Console.WriteLine("Staff successfully deleted from system.");
-            }     
-
-               
-            else
-            {
-                Console.WriteLine("That name is not recognised, please try again.");
-
-
-            }
 
         }
 
-
-        //calls lists with login info
-        //Following 4 lines Ultimately failed to work for log in and had to be called from programme
-        //List<Nurse> nurseO = Nurse.nurse;
-        // List<dentist> dentistsO = dentist.den;
-
-        //Test staff members
-        // nurseO.Add(new Nurse() { staffName = "Tester", staffPractice = "Taunton", staffRoom = 1, userName = "test", userPassword = "test" });
-        // nurseO.Add(new Nurse() { staffName = "Nurse2", staffPractice = "Street", staffRoom = 3, userName = "nursetwo", userPassword = "nursetwo" });
-
-            //FINAL LOG IN
-        //Login attempts counter
-        
-
-        public void NurseLogIn()
-        {
-
-            //Login attempts counter
-            int Attempts = 3;
-
-            //Loop to limit login attempts into system.
-            for (int i = 0; i < 3; i++)
-            {
-                Console.WriteLine("Enter username");
-                string username = Console.ReadLine();
-                Console.WriteLine("Enter password");
-                string password = Console.ReadLine();
-
-
-                //Takes 1 off the account number. Displays attempts remaining. Programme ends when 0 is reached.
-                if (username != userName && password != userPassword)
-                { 
-                Attempts -= 1;
-                Console.WriteLine("Incorrect username or password. {0} Attempts Remaining.", Attempts);
-                
-                    }
-                else { break; }
-            }
-
-            //Display the result
-            if (Attempts == 0)
-                Console.WriteLine("Login failure. Restart the programme or contact an admin to reset your username and password.");
-            else
-                Console.WriteLine("Welcome {0}", staffName, staffPractice);
-                NurseFunctions();
-
-
-            Console.ReadKey();
-
-        }
-        
-
+     
+       
         private void NurseFunctions()
         {
-            Appointment choice = new Appointment();
-            Reception func = new Reception();
+            Appointment ap = new Appointment();
+            
+            Patient pat = new Patient();
             Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS. Press 3 to ADD NOTES to Appointment. Press 4 to REQUEST CHANGE CREDENTIALS");
             string select = Console.ReadLine();
 
             if (select == "1")
             {
-                func.ViewPatients();
+                pat.ViewPatients();
 
             }
 
 
             else if (select == "2")
             {
-                choice.viewApps();
+                ap.viewApps();
 
             }
 
             else if (select == "3")
             {
-                choice.AddNotes();
+                ap.AddNotes();
             }
 
             else if (select == "4")
             {
-                func.RequestCredentials();
+                RequestCredentials();
             }
             else
             {
@@ -277,23 +305,5 @@ namespace CW22
         }
 
 
-
-
     }
-
-
-    }
-
-
-
-
-
-
-
-       
-    
-
-
-
-
-
+}

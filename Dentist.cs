@@ -3,39 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
-namespace CW22
+namespace SCDT41CW
 {
-    class dentist : Staff
+    class Dentist : Staff
     {
+
+
         //base to access constructor from Staff abstract class.
-        public dentist(string name, string practice, int room, string username, string password) : base(name, practice, room, username, password)
+        public Dentist(string name, string practice, int room, string username, string password) : base(name, practice, room, username, password)
 
-        {
-
-        }
-
-        public dentist()
         {
         }
 
-        private static List<dentist> denStaff = new List<dentist>();
-
-
-
-
-        //Make accessible from Program.
-        public static List<dentist> den
+        public Dentist()
         {
-            get { return denStaff; }
+        }
+
+        private static List<Dentist> denList = new List<Dentist>();
+        public static List<Dentist> dentists
+        {
+            get { return denList; }
 
         }
 
 
-        //Log In
 
-        public void DentistLogIn()
+        public void denLogIn()
         {
 
             //Login attempts counter
@@ -65,7 +59,7 @@ namespace CW22
                 Console.WriteLine("Login failure. Restart the programme or contact an admin to reset your username and password.");
             else
                 Console.WriteLine("Welcome {0}", staffName, staffPractice);
-            denFunctions();
+            DenFunctions();
 
 
             Console.ReadKey();
@@ -73,22 +67,70 @@ namespace CW22
         }
 
 
+        public void Add()
+        {
 
-        //Edit dentists
-        //Method to edit dentist details and assign practice and room
-        //public to be accessed by dentist
+            List<Dentist> denList = new List<Dentist>();
+
+
+
+            foreach (var nur in denList)
+            {
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", nur.staffName, nur.staffPractice, nur.staffRoom, nur.userName, nur.userPassword);
+            }
+
+        }
+
+        public void deleteDentist()
+        {
+
+
+            denList.Add(new Dentist("Test", "Test", 2, "Testdel", "Testdel"));
+
+
+            //Retrieve and print list of Nurse names.
+            foreach (var names in denList.Select(d => d.staffName))
+            {
+                Console.WriteLine(names);
+            }
+
+            Console.WriteLine("Choose a nurse to Delete.");
+            string deleteN = Console.ReadLine();
+
+            if (denList.Any(x => x.staffName == deleteN))
+            {  //Single ensures staff with same name but different details remain.
+                denList.Single(x => x.staffName == deleteN);
+                Console.WriteLine("Staff successfully deleted from system.");
+            }
+
+
+            else
+            {
+                Console.WriteLine("That name is not recognised, please try again.");
+
+
+            }
+
+        }
+
+
+        //FOR RECEPTIONIST
+        //Method to edit nurse details and assign practice and room
         public void editDen()
         {
-            List<dentist> denEd = dentist.den;
+
+            //Testdata. Adds nurses to list
+            denList.Add(new Dentist("Test", "Taunton", 3, "Test", "Test"));
+           denList.Add(new Dentist("Two", "Street", 2, "Two", "Two"));
 
             Console.WriteLine("What details would you like to edit?");
             Console.WriteLine("Press 1 for NAME. \n Press 2 for PRACTICE.\n Press 3 for ROOM \n press 4 for USERNAME \n Press 5 for PASSWORD");
 
             //Displays details of nurses to edit.
 
-            foreach (var names in denEd)
+            foreach (var nur in denList)
             {
-                Console.WriteLine(names);
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", nur.staffName, nur.staffPractice, nur.staffRoom, nur.userName, nur.userPassword);
             }
 
             int x = int.Parse(Console.ReadLine());
@@ -97,7 +139,7 @@ namespace CW22
 
                 case 1: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Name.");
                     string choice = Console.ReadLine();
 
 
@@ -109,15 +151,16 @@ namespace CW22
                         Console.WriteLine("Enter a new Name");
                         string newName = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice).staffName = newName;
-
+                        //LINQ to replace
+                        denList.First(d => d.staffName == choice).staffName = newName;
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
 
                 case 2: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit Practice.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Practice.");
                     string choice2 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -125,17 +168,17 @@ namespace CW22
                     if (staffName.Contains(choice2))
                     {
 
-                        Console.WriteLine("Assign a new Practice");
+                        Console.WriteLine("Enter Nurses' FULL NAME to assign a new Practice");
                         string newPrac = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice2).staffPractice = newPrac;
-
+                        denList.First(d => d.staffName == choice2).staffPractice = newPrac;
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
                 case 3: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit Room Assignment.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Room Assignment.");
                     string choice3 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -146,15 +189,15 @@ namespace CW22
                         Console.WriteLine("Assign a new Room");
                         int newRoom = Convert.ToInt32(Console.ReadLine());
 
-                        denEd.First(d => d.staffName == choice3).staffRoom = newRoom;
-
+                        denList.First(d => d.staffName == choice3).staffRoom = newRoom;
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
 
                 case 4: //Name
 
-                    Console.WriteLine("Choose a Dentists' Name to Edit Username.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit Username.");
                     string choice4 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -165,14 +208,14 @@ namespace CW22
                         Console.WriteLine("Assign a new Username");
                         string newUname = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice4).userName = newUname;
-
+                       denList.First(d => d.staffName == choice4).userName = newUname;
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
                 case 5: //Name
 
-                    Console.WriteLine("Choose a dentists' Name to Edit their Password.");
+                    Console.WriteLine("Enter Nurses' FULL NAME to Edit their Password.");
                     string choice5 = Console.ReadLine();
 
                     //Sets new value for property of object in list.
@@ -183,8 +226,8 @@ namespace CW22
                         Console.WriteLine("Assign a new Password");
                         string newPass = Console.ReadLine();
 
-                        denEd.First(d => d.staffName == choice5).userPassword = newPass;
-
+                        denList.First(d => d.staffName == choice5).userPassword = newPass;
+                        Console.WriteLine("Nurse {0} details updated", staffName);
                     }
 
                     break;
@@ -192,78 +235,80 @@ namespace CW22
 
         }
 
-        public void deleteDen()
+
+        public void AddDen()
         {
-            List<dentist> dentists = dentist.den;
-
-           
-
-           dentists.Add(new dentist("TestD", "TestD", 4, "Testdel", "Testdel"));
 
 
-            //Retrieve and print list of Nurse names.
-            foreach (var names in dentists.Select(d => d.staffName))
+            Console.WriteLine("Enter NAME of new User");
+            string fullName = Console.ReadLine();
+            Console.WriteLine("Enter PRACTICE of new User");
+            string newPractice = Console.ReadLine();
+            Console.WriteLine("Enter ROOM of new User");
+            int newRoom = Convert.ToInt32(Console.ReadLine()); //cast to accept int
+            Console.WriteLine("Enter USERNAME of new User");
+            string newUsername = Console.ReadLine();
+            Console.WriteLine("Enter PASSWORD NUMBER of new User");
+            string newPassword = Console.ReadLine();
+
+
+            denList.Add(new Dentist(fullName, newPractice, newRoom, newUsername, newPassword));
+
+            //Test that nurse is added
+            foreach (var nur in denList)
             {
-                Console.WriteLine(names);
-            }
+                Console.WriteLine("Nurse: {0},{1},{2},{3},{4}", nur.staffName, nur.staffPractice, nur.staffRoom, nur.userName, nur.userPassword);
 
-            Console.WriteLine("Choose a nurse to Delete.");
-            string deleteN = Console.ReadLine();
-
-            if (dentists.Any(x => x.staffName == deleteN))
-            {  //Single ensures staff with same name but different details remain.
-                dentists.Single(x => x.staffName == deleteN);
-                Console.WriteLine("Staff successfully deleted from system.");
             }
 
 
-            else
-            {
-                Console.WriteLine("That name is not recognised, please try again.");
-                
-            }
         }
 
-        public void denFunctions()
+        //Dictionary for credential reset tickets
+        private Dictionary<string, string> userTicks = new Dictionary<string, string>();
+
+
+      
+        
+
+        private void DenFunctions()
         {
-            Appointment choice = new Appointment();
-            Reception func = new Reception();
-            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS .Press 3 to ADD NOTES to Appointment. Press 4 to REQUEST CHANGE CREDENTIALS");
+            Appointment ap = new Appointment();
+
+            Patient pat = new Patient();
+            Console.WriteLine("Press 1 to VIEW PATIENTS. Press 2 to VIEW APPOINTMENTS. Press 3 to ADD NOTES to Appointment. Press 4 to REQUEST CHANGE CREDENTIALS");
             string select = Console.ReadLine();
 
             if (select == "1")
             {
-                func.ViewPatients();
+                pat.ViewPatients();
 
             }
 
 
             else if (select == "2")
             {
-                choice.viewApps();
+                ap.viewApps();
 
             }
-            //Allow additional option to be selected
+
             else if (select == "3")
             {
-                choice.AddNotes();
-
+                ap.AddNotes();
             }
-            else if(select == "4")
+
+            else if (select == "4")
             {
-                func.RequestCredentials();
-
+                RequestCredentials();
             }
-
             else
             {
                 Console.WriteLine("Input not recognised, please try again.");
-                denFunctions();
+                DenFunctions();
 
             }
         }
 
-
-
+        
     }
 }
