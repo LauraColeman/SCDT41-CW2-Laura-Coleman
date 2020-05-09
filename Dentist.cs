@@ -196,34 +196,31 @@ namespace CW22
         {
             List<dentist> dentists = dentist.den;
 
-            //Retrieve and print list of patients names.
+           
+
+           dentists.Add(new dentist("TestD", "TestD", 4, "Testdel", "Testdel"));
+
+
+            //Retrieve and print list of Nurse names.
             foreach (var names in dentists.Select(d => d.staffName))
             {
                 Console.WriteLine(names);
             }
 
+            Console.WriteLine("Choose a nurse to Delete.");
+            string deleteN = Console.ReadLine();
+
+            if (dentists.Any(x => x.staffName == deleteN))
+            {  //Single ensures staff with same name but different details remain.
+                dentists.Single(x => x.staffName == deleteN);
+                Console.WriteLine("Staff successfully deleted from system.");
+            }
 
 
-            Console.WriteLine("Choose a dentist to Delete.");
-            string delete = Console.ReadLine();
-
-            foreach (var o in dentists)
+            else
             {
-                //if a match is found, object/patient will be removed from list.
-                if (staffName == delete)
-                {
-                    dentists.Remove(o);
-
-
-                }
-
-                else
-                {
-                    Console.WriteLine("That name is not recognised, please try again.");
-                    deleteDen();
-
-                }
-
+                Console.WriteLine("That name is not recognised, please try again.");
+                
             }
         }
 

@@ -171,15 +171,13 @@ namespace CW22
             Console.WriteLine("Choose a nurse to Delete.");
             string deleteN = Console.ReadLine();
 
-
-            //if a match is found, object/patient will be removed from list.
-            if (deleteN == staffName)
-            {
-                nurseDel.RemoveAll(x => x.staffName == deleteN);
+            if (nurseDel.Any(x => x.staffName == deleteN))
+            {  //Single ensures staff with same name but different details remain.
+                nurseDel.Single(x => x.staffName == deleteN);
                 Console.WriteLine("Staff successfully deleted from system.");
+            }     
 
-            }
-
+               
             else
             {
                 Console.WriteLine("That name is not recognised, please try again.");
