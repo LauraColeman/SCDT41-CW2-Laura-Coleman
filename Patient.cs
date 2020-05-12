@@ -88,7 +88,12 @@ namespace SCDT41CW
 
         public void DeletePatient()
         {
-            List<Patient> patients = Patient.pats;
+            //For testing purposes
+            pats.Add(new Patient("Test", "Test", "Test", "Male", "000"));
+
+            //Call List to print patients
+            //List<Patient> patients = Patient.pats;
+
             Console.WriteLine("Choose a Patient to Delete.");
 
             //Retrieve and print list of patients names.
@@ -103,7 +108,7 @@ namespace SCDT41CW
             if (patients.Any(x => x.pName == choice))
             {  //Removes if match is found
                 patients.Single(x => x.pName == choice);
-                Console.WriteLine("Staff successfully deleted from system.");
+                Console.WriteLine("Pat successfully deleted from system.");
             }
 
 
