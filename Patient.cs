@@ -24,14 +24,7 @@ namespace SCDT41CW
         public string Phone { get => phone; set => phone = value; }
 
 
-        //override to print objects of list, not just class/namespace name.
-        public override string ToString()
-        {
-           
-            //Prints
-            return "Name: " + name + "Address: " + address + "Practice: " + practice + "Gender: " + gender + "Phone: " + phone;
-
-        }
+       
 
         //Constructor
         public Patient(string name, string address, string practice, string gender, string phone)
@@ -48,7 +41,14 @@ namespace SCDT41CW
         {
         }
 
+        //override to print objects of list, not just class/namespace name.
+        public override string ToString()
+        {
 
+            //Prints
+            return "Name: " + name + "Address: " + address + "Practice: " + practice + "Gender: " + gender + "Phone: " + phone;
+
+        }
 
 
         //Allow list to be accessed from other classes
