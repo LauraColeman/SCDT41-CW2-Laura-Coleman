@@ -68,15 +68,13 @@ namespace SCDT41CW
             Books.Add(new Appointment("PATTWO", "Taunton", "Band 1", "20/07/2020, 12:00", "dONE", "Notes for Nurses/Dentists only"));
 
 
-            for (int i = 0; i < Books.Count; i++)
+            foreach (var a in Books)
             {
 
-                Console.WriteLine(Books.ToString());
+                Console.WriteLine(a.ToString());
             }
 
-
-
-
+            
 
         }
 

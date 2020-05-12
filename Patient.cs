@@ -29,7 +29,7 @@ namespace SCDT41CW
         {
            
             //Prints
-            return "Name: " + pName + "Address: " + pAddr + "Practice: " + pPractice + "Gender: " + Gender + "Phone: " + Phone;
+            return "Name: " + name + "Address: " + address + "Practice: " + practice + "Gender: " + gender + "Phone: " + phone;
 
         }
 
@@ -65,19 +65,18 @@ namespace SCDT41CW
         public void ViewPatients()
         {
 
-            List<Patient> patients = new List<Patient>();
+            
             //Test - Add patients to list
-            patients.Add(new Patient("PATONE", "2 Road, Taunton, TA5", "Taunton", "Female", "111"));
+            pats.Add(new Patient("PATONE", "2 Road, Taunton, TA5", "Taunton", "Female", "111"));
 
-            patients.Add(new Patient("PATTWO", "4 Road, Taunton, TA10", "Taunton", "Female", "222"));
+            pats.Add(new Patient("PATTWO", "4 Road, Taunton, TA10", "Taunton", "Female", "222"));
 
-            patients.Add(new Patient("PATTHREE", "6 Road, Street, BA16", "Street", "Female", "333"));
+            pats.Add(new Patient("PATTHREE", "6 Road, Street, BA16", "Street", "Female", "333"));
 
 
             //Loop to print list. 
-            
 
-            foreach (var p in patients)
+            foreach (var p in pats)
             {
 
                 Console.WriteLine(p.ToString());
