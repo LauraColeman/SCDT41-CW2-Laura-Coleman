@@ -38,6 +38,11 @@ namespace SCDT41CW
         {
         }
 
+        public override string ToString()
+        {
+            return "Patient: " + Name + "Practice: " + Practice + "Treatment: " + treatment + "Date/Time: " + date + "Dentist: " + Dent + "Notes" + notes;
+        }
+
 
 
         //Store appointments and reference and access with key
